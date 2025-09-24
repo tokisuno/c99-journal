@@ -2,53 +2,42 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include <time.h>
+#include <string.h>
 
 #define SLUG_LENGTH 8
 
-char* generate_slug(void)
+const char * generate_slug(void)
 {
-  char name[SLUG_LENGTH];
-  time_t rawtime;
-  time ( &rawtime );
+  struct tm *tm;
+  time_t t;
+  t = time(NULL);
+  tm = localtime(&t);
 
-  struct tm *timeinfo = localtime( &rawtime );
+  int year = tm->tm_year;
+  int month = tm->tm_mon;
+  int day = tm->tm_mday;
 
-  int year = timeinfo->tm_year;
-  int month = timeinfo->tm_mon;
-  int day = timeinfo->tm_mday;
+  char* buffer[10];
+  // sprintf(*buffer, "%02d%02d%02d", year, month, day);
+  sprintf(*buffer, "%02d%02d%02d", year, month, day);
 
-  sprintf(name, "%d%02d%02d", year, month, day);
-
-  // char *word = malloc(SLUG_LENGTH + 1);
+  printf("%s", *buffer);
 
   return "hi";
 }
 
-bool file_exists(const char *filename)
-{
-  FILE *fp = fopen(filename, "r");
-
-  bool is_exist = false;
-
-  if (fp != NULL) {
-    is_exist = true;
-    fclose(fp);
-  }
-
-  return is_exist;
-}
-
 void write_to_file(void)
 {
+
 }
 
 // int main(int argc, char *argv[]) {
 int main(void)
 {
   printf("Hello world\n");
+  const char* datestring = generate_slug();
 
-  char *slug[SLUG_LENGTH];
-  *slug = generate_slug();
+  printf("%s", datestring);
 
   return 0;
 }
