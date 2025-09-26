@@ -6,8 +6,6 @@
 #include <errno.h>
 #include <time.h>
 
-#define SLUG_LENGTH 8
-
 static const char text_editor[] = "/bin/nvim";
 static const char journal_folder[] = "Journal";
 
